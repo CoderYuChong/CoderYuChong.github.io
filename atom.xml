@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-09T12:56:00.000Z</updated>
+  <updated>2016-08-09T13:41:55.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,87 +15,14 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2016/08/09/hello/"/>
-    <id>http://yoursite.com/2016/08/09/hello/</id>
-    <published>2016-08-09T12:56:00.000Z</published>
-    <updated>2016-08-09T12:56:00.000Z</updated>
-    <content type="html"><![CDATA[<p>#在iOS开发中，和货币价格计算相关的，使用float类型运算问题<br>  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用<code>float</code>类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的<code>NSDecimalNumber</code>来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。</p>
-<pre>
- NSString *priceJsonStr = @"{\"price\":\"66.7\",\"rate\":11.8,\"markprice\":19.72,\"saleprice\":14.00}";
-    NSData *jsonData = [priceJsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
-    NSLog(@"%f",[dic[@"price"] floatValue]); // 打印的值 66.699997
-    NSLog(@"%f",[dic[@"rate"] floatValue]); // 打印的值 11.800000
-    NSLog(@"%f",[dic[@"markprice"] floatValue]); // 打印的值 19.719999
-    NSLog(@"%f",[dic[@"saleprice"] floatValue]); // 打印的值 14.000000
-</pre>
-
-
-<h2 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h2>  <pre>
-  //  NSString 类型转换成 NSDecimalNumber
-    + (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue;
-    // 加
-    - (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber;
-    // 减
-    - (NSDecimalNumber *)decimalNumberBySubtractin
-    g:(NSDecimalNumber *)decimalNumber;
-    // 乘
-    - (NSDecimalNumber *)decimalNumberByMultiplyingBy:(NSDecimalNumber *)decimalNumber;
-    // 除
-    - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
-   </pre>
-## 比较大小
-
-<pre>
-
-    NSDecimalNumber *discount1 = [NSDecimalNumber decimalNumberWithString:@".26"];
-
-    NSDecimalNumber *discount2 = [NSDecimalNumber decimalNumberWithString:@".75"];
-
-    NSComparisonResult result = [discount1 compare:discount2];
-
-    if (result ==NSOrderedAscending) {
-
-        NSLog(@"26%% < 75%%小于");
-
-    } else if (result == NSOrderedSame) {
-
-        NSLog(@"26%% == 75%%等于");
-
-    } else if (result ==NSOrderedDescending) {
-
-        NSLog(@"26%% > 75%%大于");
-
-    }
-</pre>
-## 浮点型取小数
-<pre> 
-/**
- *  只入不舍
- *
- *  @param floatValue 要转的值
- *  @param position   取多少位
- */
-- (NSString *)floatToInt:(CGFloat)floatValue afterPoint:(int)position{
-
-    /*
-    NSRoundPlain,   // Round up on a tie  取整
-    NSRoundDown,    // Always down == truncate  只舍不入
-    NSRoundUp,      // Always up 只入不舍
-    NSRoundBankers  // on a tie round so last digit is even  四舍五入
-     */
-
-    NSDecimalNumberHandler *roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
-    NSDecimalNumber *ouncesDecimal = [[NSDecimalNumber alloc]initWithFloat:floatValue];
-    NSDecimalNumber *roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
-
-    return [NSString stringWithFormat:@"%@",roundedOunces];
-}
-</pre>
-]]></content>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://yoursite.com/2016/08/09/Hello-World/"/>
+    <id>http://yoursite.com/2016/08/09/Hello-World/</id>
+    <published>2016-08-09T13:41:54.000Z</published>
+    <updated>2016-08-09T13:41:55.000Z</updated>
+    <content type="html"></content>
     <summary type="html">
-    <![CDATA[<p>#在iOS开发中，和货币价格计算相关的，使用float类型运算问题<br>  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用<code>float</code>类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的A]]>
+    
     </summary>
     
   </entry>
