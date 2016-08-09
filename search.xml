@@ -31,9 +31,8 @@
     // 除
     - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
    </pre>
-## 比较大小
 
-<pre>
+<h2 id="比较大小"><a href="#比较大小" class="headerlink" title="比较大小"></a>比较大小</h2><pre>
 
     NSDecimalNumber *discount1 = [NSDecimalNumber decimalNumberWithString:@".26"];
 
@@ -55,8 +54,8 @@
 
     }
 </pre>
-## 浮点型取小数
-<pre> 
+
+<h2 id="浮点型取小数"><a href="#浮点型取小数" class="headerlink" title="浮点型取小数"></a>浮点型取小数</h2><pre> 
 /**
  *  只入不舍
  *

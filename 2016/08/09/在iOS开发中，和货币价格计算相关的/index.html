@@ -25,7 +25,7 @@
 <meta property="og:description" content="#在iOS开发中，和货币价格计算相关的，使用float类型运算问题  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用float类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的NSDecimalNumber来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。
 
  NSS">
-<meta property="og:updated_time" content="2016-08-09T13:45:55.000Z">
+<meta property="og:updated_time" content="2016-08-09T13:58:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoderYuChong">
 <meta name="twitter:description" content="#在iOS开发中，和货币价格计算相关的，使用float类型运算问题  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用float类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的NSDecimalNumber来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。
@@ -270,9 +270,8 @@
     // 除
     - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
    </pre>
-## 比较大小
 
-<pre>
+<h2 id="比较大小"><a href="#比较大小" class="headerlink" title="比较大小"></a>比较大小</h2><pre>
 
     NSDecimalNumber *discount1 = [NSDecimalNumber decimalNumberWithString:@".26"];
 
@@ -294,8 +293,8 @@
 
     }
 </pre>
-## 浮点型取小数
-<pre> 
+
+<h2 id="浮点型取小数"><a href="#浮点型取小数" class="headerlink" title="浮点型取小数"></a>浮点型取小数</h2><pre> 
 /**
  *  只入不舍
  *
@@ -329,7 +328,7 @@
         <p><span>本文标题:</span><a href="/2016/08/09/在iOS开发中，和货币价格计算相关的/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">CoderYuChong</a></p>
         <p><span>发布时间:</span>2016-08-09, 21:43:43</p>
-        <p><span>最后更新:</span>2016-08-09, 21:45:55</p>
+        <p><span>最后更新:</span>2016-08-09, 21:58:02</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/08/09/在iOS开发中，和货币价格计算相关的/" title="">http://yoursite.com/2016/08/09/在iOS开发中，和货币价格计算相关的/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/08/09/在iOS开发中，和货币价格计算相关的/　　作者: CoderYuChong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -348,7 +347,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本运算"><span class="toc-number">1.</span> <span class="toc-text">基本运算</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本运算"><span class="toc-number">1.</span> <span class="toc-text">基本运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较大小"><span class="toc-number">2.</span> <span class="toc-text">比较大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点型取小数"><span class="toc-number">3.</span> <span class="toc-text">浮点型取小数</span></a></li></ol>
         
     </div>
     <style>
