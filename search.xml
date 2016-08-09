@@ -6,8 +6,7 @@
     <entry>
       <title></title>
       <url>http://yoursite.com/2016/08/09/%E5%9C%A8iOS%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E5%92%8C%E8%B4%A7%E5%B8%81%E4%BB%B7%E6%A0%BC%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84/</url>
-      <content type="html"><![CDATA[<p>title: 在iOS开发中，和货币价格计算相关的</p>
-<p>#在iOS开发中，和货币价格计算相关的，使用float类型运算问题<br>  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用<code>float</code>类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的<code>NSDecimalNumber</code>来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。</p>
+      <content type="html"><![CDATA[<p>#在iOS开发中，和货币价格计算相关的，使用float类型运算问题<br>  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用<code>float</code>类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的<code>NSDecimalNumber</code>来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。</p>
 <pre>
  NSString *priceJsonStr = @"{\"price\":\"66.7\",\"rate\":11.8,\"markprice\":19.72,\"saleprice\":14.00}";
     NSData *jsonData = [priceJsonStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -81,12 +80,6 @@
 }
 </pre>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>http://yoursite.com/2016/08/09/Hello-World/</url>
-      <content type="html"></content>
     </entry>
     
   
