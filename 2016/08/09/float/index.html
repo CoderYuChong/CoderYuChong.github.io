@@ -15,13 +15,22 @@
 
 
 
+<meta name="description" content="#在iOS开发中，和货币价格计算相关的，使用float类型运算问题  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用float类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的NSDecimalNumber来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。
+
+ NSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pagepageName">
-<meta property="og:url" content="http://yoursite.com/2016/08/09/pagepageName/index.html">
+<meta property="og:title" content="CoderYuChong">
+<meta property="og:url" content="http://yoursite.com/2016/08/09/float/index.html">
 <meta property="og:site_name" content="CoderYuChong">
-<meta property="og:updated_time" content="2016-08-09T12:54:10.000Z">
+<meta property="og:description" content="#在iOS开发中，和货币价格计算相关的，使用float类型运算问题  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用float类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的NSDecimalNumber来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。
+
+ NSS">
+<meta property="og:updated_time" content="2016-08-09T12:56:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pagepageName">
+<meta name="twitter:title" content="CoderYuChong">
+<meta name="twitter:description" content="#在iOS开发中，和货币价格计算相关的，使用float类型运算问题  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用float类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的NSDecimalNumber来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。
+
+ NSS">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>pagepageName | CoderYuChong</title>
+<title>CoderYuChong</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -218,11 +227,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-pagepageName" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-float" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/09/pagepageName/" class="article-date">
-      <time datetime="2016-08-09T12:54:10.000Z" itemprop="datePublished">2016-08-09</time>
+      <a href="/2016/08/09/float/" class="article-date">
+      <time datetime="2016-08-09T12:56:00.000Z" itemprop="datePublished">2016-08-09</time>
 </a>
 
 
@@ -233,28 +242,83 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      pagepageName
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>#在iOS开发中，和货币价格计算相关的，使用float类型运算问题<br>  在iOS开发中，和货币价格计算相关的，需要注意计算精度的问题。即使只是两位小数，也会出现误差。使用<code>float</code>类型运算，是完全不够的。经过一番测试，最后选择使用系统提供的API的<code>NSDecimalNumber</code>来进行更好的解决。作为一个对外的库，鉴于版本延续，我们保留对外的flaot的类型，不改变接口，选择进行内部适配。</p>
+<pre>
+ NSString *priceJsonStr = @"{\"price\":\"66.7\",\"rate\":11.8,\"markprice\":19.72,\"saleprice\":14.00}";
+    NSData *jsonData = [priceJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    NSLog(@"%f",[dic[@"price"] floatValue]); // 打印的值 66.699997
+    NSLog(@"%f",[dic[@"rate"] floatValue]); // 打印的值 11.800000
+    NSLog(@"%f",[dic[@"markprice"] floatValue]); // 打印的值 19.719999
+    NSLog(@"%f",[dic[@"saleprice"] floatValue]); // 打印的值 14.000000
+</pre>
+
+
+<h2 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h2>  <pre>
+  //  NSString 类型转换成 NSDecimalNumber
+    + (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue;
+    // 加
+    - (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber;
+    // 减
+    - (NSDecimalNumber *)decimalNumberBySubtractin
+    g:(NSDecimalNumber *)decimalNumber;
+    // 乘
+    - (NSDecimalNumber *)decimalNumberByMultiplyingBy:(NSDecimalNumber *)decimalNumber;
+    // 除
+    - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
+   </pre>
+## 比较大小
+
+<pre>
+
+    NSDecimalNumber *discount1 = [NSDecimalNumber decimalNumberWithString:@".26"];
+
+    NSDecimalNumber *discount2 = [NSDecimalNumber decimalNumberWithString:@".75"];
+
+    NSComparisonResult result = [discount1 compare:discount2];
+
+    if (result ==NSOrderedAscending) {
+
+        NSLog(@"26%% < 75%%小于");
+
+    } else if (result == NSOrderedSame) {
+
+        NSLog(@"26%% == 75%%等于");
+
+    } else if (result ==NSOrderedDescending) {
+
+        NSLog(@"26%% > 75%%大于");
+
+    }
+</pre>
+## 浮点型取小数
+<pre> 
+/**
+ *  只入不舍
+ *
+ *  @param floatValue 要转的值
+ *  @param position   取多少位
+ */
+- (NSString *)floatToInt:(CGFloat)floatValue afterPoint:(int)position{
+
+    /*
+    NSRoundPlain,   // Round up on a tie  取整
+    NSRoundDown,    // Always down == truncate  只舍不入
+    NSRoundUp,      // Always up 只入不舍
+    NSRoundBankers  // on a tie round so last digit is even  四舍五入
+     */
+
+    NSDecimalNumberHandler *roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+    NSDecimalNumber *ouncesDecimal = [[NSDecimalNumber alloc]initWithFloat:floatValue];
+    NSDecimalNumber *roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+
+    return [NSString stringWithFormat:@"%@",roundedOunces];
+}
+</pre>
+
       
     </div>
     
@@ -262,13 +326,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/09/pagepageName/">pagepageName</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/09/float/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">CoderYuChong</a></p>
-        <p><span>发布时间:</span>2016-08-09, 20:54:10</p>
-        <p><span>最后更新:</span>2016-08-09, 20:54:10</p>
+        <p><span>发布时间:</span>2016-08-09, 20:56:00</p>
+        <p><span>最后更新:</span>2016-08-09, 20:56:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/09/pagepageName/" title="pagepageName">http://yoursite.com/2016/08/09/pagepageName/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/08/09/pagepageName/　　作者: CoderYuChong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/09/float/" title="">http://yoursite.com/2016/08/09/float/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/08/09/float/　　作者: CoderYuChong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -284,7 +348,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本运算"><span class="toc-number">1.</span> <span class="toc-text">基本运算</span></a></li></ol>
         
     </div>
     <style>
@@ -320,7 +384,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"pagepageName　| CoderYuChong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| CoderYuChong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -336,7 +400,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/09/pagepageName/" data-title="pagepageName" data-url="http://yoursite.com/2016/08/09/pagepageName/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/09/float/" data-title="" data-url="http://yoursite.com/2016/08/09/float/"></div>
     <script>
         var duoshuoQuery = {short_name:"coderyuchong"};
         var loadComment = function(){
@@ -369,7 +433,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/09/pagepageName/">pagepageName</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/09/float/">float</a></li></ul>
 
 
 
